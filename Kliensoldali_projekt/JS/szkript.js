@@ -70,3 +70,25 @@ function jatekUjrainditasa() {
 
     jatekInicializalasa();
 }
+
+
+
+//Játékos táblák
+
+function jatektablakLetrehozasa () {
+    for (let i = 0; i <= 9; i++) {
+        for (let j = 0; j <= 9; j++) {
+            // Játékos mező létrehozása
+            var jatekosMezo = document.createElement("div");
+            jatekosTabla.appendChild(jatekosMezo);
+            jatekosMezo.classList.add("negyzet");
+            jatekosMezo.id = "j" + i + j; 
+            
+            // Gép mező létrehozása
+            var gepMezo = document.createElement("div");
+            szamitogepTabla.appendChild(gepMezo);
+            gepMezo.classList.add("negyzet");
+            gepMezo.id = "g" + i + j; 
+        }
+    }
+};
