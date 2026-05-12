@@ -22,3 +22,11 @@ function gepTippelese() {
         }
     }
 }
+
+function gyozelemEllenorzese() {
+
+    if (j1TalalatSzam >= 17 || gepTalalatSzam >= 17) {
+
+        jatekBefejezese();
+    }
+}
