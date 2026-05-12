@@ -31,3 +31,42 @@ function gyozelemEllenorzese() {
         jatekBefejezese();
     }
 }
+
+//Kör befejezése
+function jatekBefejezese() {
+
+    jatekVege = true;
+
+    szamitogepTabla.removeEventListener(
+        "click",
+        gTablaKezelo
+    );
+
+    if (j1TalalatSzam >= 17) {
+
+        vegeSzoveg.textContent =
+            "Az ellenség megsemmisült. Előléptetés vár önre.";
+
+    } else {
+
+        vegeSzoveg.textContent =
+            "A flottája megsemmisült.";
+    }
+}
+
+
+//Újrakezdés
+function jatekUjrainditasa() {
+
+    jatekVege = false;
+
+    j1TalalatSzam = 0;
+    gepTalalatSzam = 0;
+
+    j1Celzott = [];
+    gepCelzott = [];
+
+    vegeSzoveg.textContent = "";
+
+    jatekInicializalasa();
+}
