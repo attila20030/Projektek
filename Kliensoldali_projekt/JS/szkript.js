@@ -125,6 +125,29 @@ function hajoLerakasa(hajo, jatekosSor, jatekosOszlop) {
     }
     return ujPozicio;
 
+
+//Kattintás alapú hajóelhelyezés
+    function jTablaKezeloH(event) {
+    if(!kivalasztottHajo) return;
+    jatekosSorKoord = event.target.id.substring(1,2);
+    jatekosOszlopKoord = event.target.id.substring(2,3);
+    
+    // Kiszámolt helyek lekérése
+    kivalasztottHajo.hely = hajoLerakasa(kivalasztottHajo, jatekosSorKoord, jatekosOszlopKoord);
+    var j1Helyszinek = kivalasztottHajo.hely;
+
+    // Mezők átszínezése
+    if(j1Helyszinek.length > 0){
+        j1Helyszinek = j1Helyszinek.map(function(hely){
+            return '#' + hely;
+        });
+        var helyIDk = document.querySelectorAll(j1Helyszinek.join(", "));
+        for (let i = 0; i < helyIDk.length; i++) {
+            helyIDk[i].classList.add("elhelyezve");
+        }
+        kivalasztottHajo = null; 
+    }
+}
     
 }
 
