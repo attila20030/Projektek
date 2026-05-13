@@ -1,3 +1,30 @@
+// Játékállapotok és irányok konstansai
+const URES = 0;
+const MELLE = 1;
+const HAJO = 2;
+const TALALAT = 3;
+const ELSULLYEDT = 4; 
+const FUGGOLOGES = 0;
+const VIZSZINTES = 1;
+
+// Koordináta-kezeléshez szükséges globális változók
+var sorKoord; 
+var oszlopKoord;
+var kivalasztottHajo; 
+var jatekosSorKoord;
+var jatekosOszlopKoord;
+var negyzetek = [];
+
+
+
+
+
+
+
+
+
+
+
 //A tippelések AI oldalról
 function gepTippelese() {
     var veletlenSor = Math.floor(10 * Math.random());
