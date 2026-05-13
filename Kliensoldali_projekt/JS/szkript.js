@@ -100,6 +100,31 @@ function hajoLerakasa(hajo, jatekosSor, jatekosOszlop) {
     var sor = parseInt(jatekosSor);
     var oszlop = parseInt(jatekosOszlop);
 
+        if (!hajo.elhelyezve) {
+        for (var i = 0; i < hajo.hossz; i++) {
+            if (hajo.irany === FUGGOLOGES) {
+                if (sor <= 10 - hajo.hossz) {
+                    pozicio[i] = sor + i;
+                    ujPozicio = pozicio.map(function(hely) {
+                        return 'j' + hely + oszlop;
+                    });
+                    hajo.elhelyezve = true;
+                    document.getElementById(kivalasztottHajo.nev).disabled = true; 
+                }
+            } else {
+                if (oszlop <= 10 - hajo.hossz) {
+                    pozicio[i] = oszlop + i;
+                    ujPozicio = pozicio.map(function(hely) {
+                        return 'j' + sor + hely;
+                    });
+                    hajo.elhelyezve = true;
+                    document.getElementById(kivalasztottHajo.nev).disabled = true; 
+                }
+            }
+        }
+    }
+    return ujPozicio;
+
     
 }
 
