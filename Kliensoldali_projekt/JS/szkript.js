@@ -92,3 +92,15 @@ function jatektablakLetrehozasa () {
         }
     }
 };
+
+
+//Hajóelhelyezés
+
+function hajoLerakasa(hajo, jatekosSor, jatekosOszlop) { 
+    var pozicio = [];
+    var ujPozicio = [];
+    var sor = parseInt(jatekosSor);
+    var oszlop = parseInt(jatekosOszlop);
+
+    
+}
