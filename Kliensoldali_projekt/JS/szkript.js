@@ -28,6 +28,17 @@ var forgatasGomb = document.getElementById("forgatas");
 
 
 
+// Hajó objektumok alapállapotának definiálása
+var anyahajo = {nev: 'anyahajo', hossz: 5, irany: 0, hely: [], talalatok: [], elhelyezve: false};
+var csatahajo = {nev: 'csatahajo', hossz: 4, irany: 0, hely: [], talalatok: [], elhelyezve: false};
+var rombolo = {nev: 'rombolo', hossz: 3, irany: 0, hely: [], talalatok: [], elhelyezve: false};
+var tengeralattjaro = {nev: 'tengeralattjaro', hossz: 3, irany: 0, hely: [], talalatok: [], elhelyezve: false};
+var jaror = {nev: 'jaror', hossz: 2, irany: 0, hely: [], talalatok: [], elhelyezve: false};
+
+// Játékos és gép flottájának összeállítása
+var j1Hajok = [anyahajo, csatahajo, rombolo, tengeralattjaro, jaror];
+var gepHajok = [anyahajo, csatahajo, rombolo, tengeralattjaro, jaror];
+
 
 
 
