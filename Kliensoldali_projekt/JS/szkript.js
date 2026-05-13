@@ -15,7 +15,16 @@ var jatekosSorKoord;
 var jatekosOszlopKoord;
 var negyzetek = [];
 
-
+// HTML elemek referenciáinak lekérése
+var jatekosTabla = document.getElementById("jatekos_tabla");
+var szamitogepTabla = document.getElementById("szamitogep_tabla");
+var ujrainditasGomb = document.getElementById("ujrainditas");
+var anyahajoGomb = document.getElementById("anyahajo");
+var csatahajoGomb = document.getElementById("csatahajo");
+var romboloGomb = document.getElementById("rombolo");
+var tengeralattjaroGomb = document.getElementById("tengeralattjaro");
+var jarorGomb = document.getElementById("jaror");
+var forgatasGomb = document.getElementById("forgatas");
 
 
 
