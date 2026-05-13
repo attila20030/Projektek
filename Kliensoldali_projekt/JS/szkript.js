@@ -74,7 +74,6 @@ function jatekUjrainditasa() {
 
 
 //Játékos táblák
-
 function jatektablakLetrehozasa () {
     for (let i = 0; i <= 9; i++) {
         for (let j = 0; j <= 9; j++) {
@@ -95,7 +94,6 @@ function jatektablakLetrehozasa () {
 
 
 //Hajóelhelyezés
-
 function hajoLerakasa(hajo, jatekosSor, jatekosOszlop) { 
     var pozicio = [];
     var ujPozicio = [];
@@ -103,4 +101,43 @@ function hajoLerakasa(hajo, jatekosSor, jatekosOszlop) {
     var oszlop = parseInt(jatekosOszlop);
 
     
+}
+
+//Gép által megadott hajók véletlen elhelyzezése
+function gepHajokVeletlenszeruElhelyezese() {
+
+    for (var i = 0; i < gepHajok.length; i++) {
+
+        var nincsElhelyezve = true;
+
+        while (nincsElhelyezve) {
+
+            var veletlenSor =
+                Math.floor(10 * Math.random());
+
+            var veletlenOszlop =
+                Math.floor(10 * Math.random());
+
+            var veletlenIrany =
+                Math.round(Math.random());
+
+            if (
+                elhelyezesEllenorzese(
+                    veletlenSor,
+                    veletlenOszlop,
+                    gepHajok[i]
+                )
+            ) {
+
+                letrehoz(
+                    veletlenSor,
+                    veletlenOszlop,
+                    gepHajok[i],
+                    veletlenIrany
+                );
+
+                nincsElhelyezve = false;
+            }
+        }
+    }
 }
