@@ -189,3 +189,59 @@ function gepHajokVeletlenszeruElhelyezese() {
         }
     }
 }
+
+//Annak a helynek az ellenörzése ahol találat ért
+function helyEllenorzese(
+    tomb,
+    e,
+    sorK,
+    oszlopK
+) {
+
+    if (tomb[sorK][oszlopK] === URES) {
+
+        e.target.classList.add("melle");
+
+        tomb[sorK][oszlopK] = MELLE;
+
+    } else if (tomb[sorK][oszlopK] === HAJO) {
+
+        e.target.classList.add("talalat");
+
+        tomb[sorK][oszlopK] = TALALAT;
+
+        j1TalalatSzam++;
+    }
+}
+
+//Ellenfél táblájának kezelése
+gTablaKezelo = function(e) {
+
+    if (
+        !(j1Celzott.includes(e.target.id)) &&
+        !jatekVege &&
+        e.target.id.startsWith("g")
+    ) {
+
+        j1Celzott.push(e.target.id);
+
+        sorKoord = e.target.id.substring(1,2);
+
+        oszlopKoord = e.target.id.substring(2,3);
+
+        helyEllenorzese(
+            gepTabla,
+            e,
+            sorKoord,
+            oszlopKoord
+        );
+
+        setTimeout(function() {
+
+            gepTippelese();
+
+        }, 1000);
+
+        gyozelemEllenorzese();
+    }
+};
