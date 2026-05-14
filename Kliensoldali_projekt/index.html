@@ -1,36 +1,55 @@
 <!DOCTYPE html>
 <html lang="hu">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="./CSS/index.css">
-    <script src="./JS/szkript.js" defer></script>
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
-    <title>A Hajók Csatája</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="./CSS/index.css">
+  <script src="./JS/szkript.js" defer></script>
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+  <title>A Hajók Csatája</title>
 </head>
-  <body>
-    <main id="fo" class="rejtett">
-      <div id="jatekos_oldal">
-        <h3 id="jatekos">A TE HAJÓID</h3>
-        <section id="jatekos_tabla"></section>
-      </div>
 
-      <div id="hajok">
-        <h3>Helyezd el a hajókat:</h3>
-        <button id="anyahajo">Anyahajó</button>
-        <button id="csatahajo">Csatahajó</button>
-        <button id="rombolo">Romboló</button>
-        <button id="tengeralattjaro">Tengeralattjáró</button>
-        <button id="jaror">Járőrhajó</button>
-        <button id="forgatas">Forgatás</button>
-        <button id="tuzeles">Művelet Megkezdése</button>
-      </div>
+<body id="test">
+  <div id="bevezeto">
+    <h1>Harc a Tengeri Uralomért</h1>
+    <h2 id="utasitasok1">Jó reggelt Admirális! <br>
+      04:30-kor öt ellenséges hajót észleltünk 50 mérföldre a pozíciójától. <br>
+      A parancsa, hogy kutassa fel és semmisítse meg az ellenséges flottát. <br>
+      Sok szerencsét! </h2>
+    <h3 id="utasitasok2" class="rejtett">1. Helyezze el a hajóit <br>2. Ha készen áll, "Művelet Megkezdése" <br> 3.
+      Célozza meg az ellenséges területet <br> 4. Az ellenség azonnal viszonozni fogja a tüzet</h3>
+    <h2 id="vege"></h2>
+    <button id="jatek">Játék (Start)</button>
+  </div>
 
-      <div id="ellenseg_oldal">
-        <h3 id="ellenseg">ELLENSÉGES FLOTTA</h3>
-        <section id="szamitogep_tabla"></section>
-      </div>
-    </main>
-  </body>
+  <main id="fo" class="rejtett">
+    <div id="jatekos_oldal">
+      <h3 id="jatekos">A TE HAJÓID</h3>
+      <section id="jatekos_tabla"></section>
+    </div>
+
+    <div id="hajok">
+      <h3>Helyezd el a hajókat:</h3>
+      <button id="anyahajo">Anyahajó</button>
+      <button id="csatahajo">Csatahajó</button>
+      <button id="rombolo">Romboló</button>
+      <button id="tengeralattjaro">Tengeralattjáró</button>
+      <button id="jaror">Járőrhajó</button>
+      <button id="forgatas">Forgatás</button>
+      <button id="tuzeles">Művelet Megkezdése</button>
+    </div>
+
+    <div id="ellenseg_oldal">
+      <h3 id="ellenseg">ELLENSÉGES FLOTTA</h3>
+      <section id="szamitogep_tabla"></section>
+    </div>
+  </main>
+
+  <footer id="lablec" class="rejtett">
+    <button id="ujrainditas">Újraindítás</button>
+  </footer>
+</body>
+
 </html>
