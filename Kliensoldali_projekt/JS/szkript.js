@@ -211,3 +211,208 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         }
     };    
+function hatarokonBelulEllenoriz (sor, oszlop, hajo) { 
+        if (hajo.irany === FUGGOLOGES) {
+            if (sor + hajo.hossz < 10) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            if (oszlop + hajo.hossz < 10) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    };
+    
+    function letrehoz(sor, oszlop, hajo, irany) { 
+        sorKoord = sor;
+        oszlopKoord = oszlop;
+        hajo.irany = irany;
+        for (var i = 0; i < hajo.hossz; i++) {
+            if (hajo.irany === FUGGOLOGES) {
+                gepTabla[sorKoord + i][oszlopKoord] = HAJO;
+            } else {
+                gepTabla[sorKoord][oszlopKoord + i] = HAJO;
+            }
+        }
+    };
+    
+    function elhelyezesEllenorzese (sor, oszlop, hajo) { 
+        if (hatarokonBelulEllenoriz(sor, oszlop, hajo)) { 
+            for (var i = 0; i < hajo.hossz; i++) {
+                if (hajo.irany === FUGGOLOGES) {
+                    if (gepTabla[sor + i][oszlop] === HAJO ||
+                        gepTabla[sor + i][oszlop] === MELLE ||
+                        gepTabla[sor + i][oszlop] === ELSULLYEDT) {
+                            return false;
+                        }
+                    } else {
+                        if (gepTabla[sor][oszlop + i] === HAJO ||
+                            gepTabla[sor][oszlop + i] === MELLE ||
+                            gepTabla[sor][oszlop + i] === ELSULLYEDT) {
+                                return false;
+                            }
+                        }
+            }
+            return true;
+        } else {
+            return false;
+        }
+    };
+
+    function gepHajokVeletlenszeruElhelyezese() { 
+        for (var i = 0; i < gepHajok.length; i++) {
+            var nincsElhelyezve = true; 
+            while (nincsElhelyezve) {
+                var veletlenSor = Math.floor(10 * Math.random());
+                var veletlenOszlop = Math.floor(10 * Math.random());
+                var veletlenIrany = Math.round(Math.random());
+                
+                if (elhelyezesEllenorzese(veletlenSor, veletlenOszlop, gepHajok[i])) {
+                    letrehoz(veletlenSor, veletlenOszlop, gepHajok[i], veletlenIrany);
+                    nincsElhelyezve = false;
+                }
+            };
+        };
+    }; 
+   
+    function jatekInicializalasa() {
+        fo.classList.remove("rejtett");
+        fo.classList.add("lathato");
+        lablec.classList.remove("rejtett");
+        lablec.classList.add("lathato");
+        jatektablakLetrehozasa();
+        hajokElhelyezese();
+        gepHajokVeletlenszeruElhelyezese();
+        tuzelesGomb.disabled = false;
+    };
+            
+    jatekGomb.addEventListener("click", function(e) {
+        jatekInicializalasa();
+        bevezeto.removeChild(jatekGomb);
+        bevezeto.removeChild(u1Szoveg);
+        u2Szoveg.classList.add("lathato");
+    });        
+
+    function muveletMegkezdese() {
+        
+        function jatekBefejezese() {
+            jatekVege = true;
+            szamitogepTabla.removeEventListener("click", gTablaKezelo); 
+            if (j1TalalatSzam >= 17) {
+                vegeSzoveg.textContent = "Az ellenség megsemmisült. Előléptetés vár önre."
+                jatekosFlottaSzoveg.classList.add("pozicio2");
+                ellensegFlottaSzoveg.classList.add("pozicio2");
+            } else {
+                vegeSzoveg.textContent = "A flottája megsemmisült."
+                jatekosFlottaSzoveg.classList.add("pozicio2");
+                ellensegFlottaSzoveg.classList.add("pozicio2");
+            }
+        };
+        
+        function gyozelemEllenorzese() {
+            if(j1TalalatSzam >= 17 || gepTalalatSzam >= 17) {
+                jatekBefejezese();
+            }
+        };
+        
+        function helyEllenorzese(tomb, e, sorK, oszlopK) {
+            if (tomb[sorK][oszlopK] === URES) {
+                e.target.classList.add("melle");
+                tomb[sorK][oszlopK] = MELLE;
+            } else if (tomb[sorK][oszlopK] === HAJO) {
+                e.target.classList.add("talalat");
+                tomb[sorK][oszlopK] = TALALAT;
+                j1TalalatSzam++;
+            };
+        }
+        
+        function gepTippelese() {
+            var veletlenSor = Math.floor(10 * Math.random());
+            var veletlenOszlop = Math.floor(10 * Math.random());
+            var jID = "j" + veletlenSor + veletlenOszlop; 
+
+            if (!gepCelzott.includes(jID)) {
+                for (let i = 0; i < j1Hajok.length; i++) {
+                    if (j1Hajok[i].hely.includes(jID) && !j1Hajok[i].talalatok.includes(jID)) {   
+                        j1Hajok[i].talalatok.push(jID);
+                        document.getElementById(jID).classList.remove("elhelyezve");
+                        document.getElementById(jID).classList.add("talalat");
+                        gepCelzott.push(jID);
+                        gepTalalatSzam++;
+                    } else if (!j1Hajok[i].hely.includes(jID)) {
+                        document.getElementById(jID).classList.add("melle");
+                        gepCelzott.push(jID);
+                    }
+                }
+            }
+        };
+        
+        gTablaKezelo = function(e) {
+            if(!(j1Celzott.includes(e.target.id)) && !jatekVege && e.target.id.startsWith("g")) {
+                j1Celzott.push(e.target.id);
+                sorKoord = e.target.id.substring(1,2);
+                oszlopKoord = e.target.id.substring(2,3);
+                helyEllenorzese(gepTabla, e, sorKoord, oszlopKoord);
+                setTimeout(function() {
+                    gepTippelese() 
+                }, 1000);
+                gyozelemEllenorzese();
+            }
+        };
+
+        szamitogepTabla.addEventListener("click", gTablaKezelo);
+    };
+
+    tuzelesGomb.addEventListener("click", function(e) {
+        muveletMegkezdese();
+        tuzelesGomb.disabled = true; 
+    });
+            
+    function jatekUjrainditasa() {
+        jatekVege = false;
+        for (let i = 0; i < j1Hajok.length; i++) {
+            document.getElementById(j1Hajok[i].nev).disabled = false; 
+            j1Hajok[i].elhelyezve = false;
+            document.getElementById(j1Hajok[i].nev).classList.remove("elhelyezve");
+            j1Hajok[i].hely = [];
+            j1Hajok[i].talalatok = [];
+        };
+        j1TalalatSzam = 0;
+        gepTalalatSzam = 0;
+        j1Celzott = [];
+        gepCelzott = [];     
+        gepTabla = 
+        [[0,0,0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0,0,0]];
+        sorKoord = 0; 
+        oszlopKoord = 0;
+        kivalasztottHajo = null; 
+        jatekosSorKoord = "";
+        jatekosOszlopKoord = "";
+        negyzetek = [];
+        while (jatekosTabla.firstChild) {
+            jatekosTabla.removeChild(jatekosTabla.firstChild);
+        };
+        while (szamitogepTabla.firstChild) {
+            szamitogepTabla.removeChild(szamitogepTabla.firstChild);
+        };
+        vegeSzoveg.textContent = "";
+        jatekInicializalasa();
+    };
+
+    ujrainditasGomb.addEventListener("click", function(e) {
+        jatekUjrainditasa();
+    });
+});
