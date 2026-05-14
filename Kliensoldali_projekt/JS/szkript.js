@@ -41,6 +41,35 @@ var gepHajok = [anyahajo, csatahajo, rombolo, tengeralattjaro, jaror];
 
 
 
+// Hajó tényleges rögzítése 
+function letrehoz(sor, oszlop, hajo, irany) { 
+    sorKoord = sor;
+    oszlopKoord = oszlop;
+    hajo.irany = irany;
+    for (var i = 0; i < hajo.hossz; i++) {
+        if (hajo.irany === FUGGOLOGES) {
+            gepTabla[sorKoord + i][oszlopKoord] = HAJO;
+        } else {
+            gepTabla[sorKoord][oszlopKoord + i] = HAJO;
+        }
+    }
+};
+
+// Ellenőrzés a hajó a pályán belül van-e és nem ütközik-e más hajóval
+function elhelyezesEllenorzese (sor, oszlop, hajo) { 
+    if (hatarokonBelulEllenoriz(sor, oszlop, hajo)) { 
+        for (var i = 0; i < hajo.hossz; i++) {
+            if (hajo.irany === FUGGOLOGES) {
+                if (gepTabla[sor + i][oszlop] === HAJO || gepTabla[sor + i][oszlop] === MELLE || gepTabla[sor + i][oszlop] === ELSULLYEDT) return false;
+            } else {
+                if (gepTabla[sor][oszlop + i] === HAJO || gepTabla[sor][oszlop + i] === MELLE || gepTabla[sor][oszlop + i] === ELSULLYEDT) return false;
+            }
+        }
+        return true;
+    }
+    return false;
+};
+
 
 
 
