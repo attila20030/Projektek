@@ -211,6 +211,8 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         }
     };    
+
+//Innen már ati csinálta csak nem tudjuk a githubos fiókokat kezelni ezért linda feltöltötte
 function hatarokonBelulEllenoriz (sor, oszlop, hajo) { 
         if (hajo.irany === FUGGOLOGES) {
             if (sor + hajo.hossz < 10) {
