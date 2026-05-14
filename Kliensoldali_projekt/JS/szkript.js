@@ -125,3 +125,89 @@ document.addEventListener("DOMContentLoaded", function() {
             hajo.irany = FUGGOLOGES;
         }
     };
+    function hajokElhelyezese() {
+        anyahajoGomb.addEventListener("click", function(e) {
+            kivalasztottHajo = j1Hajok[0];
+        });
+        csatahajoGomb.addEventListener("click", function(e) {
+            kivalasztottHajo = j1Hajok[1];
+        });
+        romboloGomb.addEventListener("click", function(e) {
+            kivalasztottHajo = j1Hajok[2];
+        });
+        tengeralattjaroGomb.addEventListener("click", function(e) {
+            kivalasztottHajo = j1Hajok[3];
+        });
+        jarorGomb.addEventListener("click", function(e) {
+            kivalasztottHajo = j1Hajok[4];
+        });
+        
+        forgatasGomb.addEventListener("click", function(e) {
+            if(kivalasztottHajo) hajoForgatasa(kivalasztottHajo);
+        });
+        
+        jatekosTabla.addEventListener("mouseover", egerFolKezeloH);
+        
+        function egerFolKezeloH(event) {
+            if(!kivalasztottHajo) return;
+            jatekosSorKoord = event.target.id.substring(1,2);
+            jatekosOszlopKoord = event.target.id.substring(2,3);
+            var sor = parseInt(jatekosSorKoord);
+            var oszlop = parseInt(jatekosOszlopKoord);
+            var pozicio = [];
+            var id_k = [];
+            
+            for (var i = 0; i < kivalasztottHajo.hossz; i++) {
+                if (kivalasztottHajo.irany === FUGGOLOGES) {
+                    if (sor <= 10 - kivalasztottHajo.hossz) {
+                        pozicio[i] = sor + i;
+                        id_k = pozicio.map(function(hely) {
+                            return '#j' + hely + oszlop;
+                        });
+                    }
+                } else {
+                    if (oszlop <= 10 - kivalasztottHajo.hossz) {
+                        pozicio[i] = oszlop + i;
+                        id_k = pozicio.map(function(hely) {
+                            return '#j' + sor + hely;
+                        });
+                    }
+                }
+            }
+            if(id_k.length > 0) {
+                negyzetek = document.querySelectorAll(id_k.join(", "));
+                for (let i = 0; i < negyzetek.length; i++) {
+                    negyzetek[i].classList.add("hajo");
+                }
+            }
+        };
+        
+        jatekosTabla.addEventListener("mouseout", egerLeKezeloH);
+
+        function egerLeKezeloH(event) {
+            for (let i = 0; i < negyzetek.length; i++) {
+                negyzetek[i].classList.remove("hajo");
+            }
+        };
+        
+        jatekosTabla.addEventListener("click", jTablaKezeloH); 
+        
+        function jTablaKezeloH(event) {
+            if(!kivalasztottHajo) return;
+            jatekosSorKoord = event.target.id.substring(1,2);
+            jatekosOszlopKoord = event.target.id.substring(2,3);
+            
+            kivalasztottHajo.hely = hajoLerakasa(kivalasztottHajo, jatekosSorKoord, jatekosOszlopKoord);
+            var j1Helyszinek = kivalasztottHajo.hely;
+            if(j1Helyszinek.length > 0){
+                j1Helyszinek = j1Helyszinek.map(function(hely){
+                    return '#' + hely;
+                });
+                var helyIDk = document.querySelectorAll(j1Helyszinek.join(", "));
+                for (let i = 0; i < helyIDk.length; i++) {
+                    helyIDk[i].classList.add("elhelyezve");
+                }
+                kivalasztottHajo = null; // Lerakás után nullázzuk a kiválasztást
+            }
+        }
+    };    
